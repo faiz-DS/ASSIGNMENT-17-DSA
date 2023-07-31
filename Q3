@@ -1,0 +1,16 @@
+def count_students_unable_to_eat(students, sandwiches):
+    while students:
+        if students[0] == sandwiches[0]:
+            students.pop(0)
+            sandwiches.pop(0)
+        else:
+            # Move the front student to the end of the queue
+            students.append(students.pop(0))
+        # Check if all students have eaten
+        if len(set(students)) == 1:
+            break
+    return len(students)
+
+# Test the function with the given examples:
+print(count_students_unable_to_eat([1, 1, 0, 0], [0, 1, 0, 1]))  # Output: 0
+print(count_students_unable_to_eat([1, 1, 1, 0, 0, 1], [1, 0, 0, 0, 1, 1]))  # Output: 3

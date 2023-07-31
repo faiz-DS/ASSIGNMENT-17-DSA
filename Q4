@@ -1,0 +1,23 @@
+from collections import deque
+
+class RecentCounter:
+    def __init__(self):
+        self.requests = deque()
+
+    def ping(self, t: int) -> int:
+        # Remove timestamps that are outside the range [t - 3000, t]
+        while self.requests and self.requests[0] < t - 3000:
+            self.requests.popleft()
+
+        # Add the new request timestamp to the queue
+        self.requests.append(t)
+
+        # Return the number of requests within the last 3000 milliseconds
+        return len(self.requests)
+
+# Test the class with the given example:
+recentCounter = RecentCounter()
+print(recentCounter.ping(1))    # Output: 1
+print(recentCounter.ping(100))  # Output: 2
+print(recentCounter.ping(3001)) # Output: 3
+print(recentCounter.ping(3002)) # Output: 3

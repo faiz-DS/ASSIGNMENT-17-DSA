@@ -1,0 +1,18 @@
+from collections import deque
+
+def reveal_cards_increasing_order(deck):
+    n = len(deck)
+    sorted_deck = sorted(deck)
+    queue = deque(range(n))
+    result = [0] * n
+
+    for card in sorted_deck:
+        result[queue.popleft()] = card
+        if queue:
+            queue.append(queue.popleft())
+
+    return result
+
+# Test the function with the given examples:
+print(reveal_cards_increasing_order([17, 13, 11, 2, 3, 5, 7]))  # Output: [2, 13, 3, 11, 5, 17, 7]
+print(reveal_cards_increasing_order([1, 1000]))  # Output: [1, 1000]
